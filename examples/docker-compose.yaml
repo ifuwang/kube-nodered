@@ -8,7 +8,7 @@ version: "3.7"
 
 services:
   node-red:
-    image: docker.io/footprintai/kube-node-red:latest
+    image: reg.footprint-ai.com/public/kube-nodered:latest
     build:
       context: .
       dockerfile: Dockerfile

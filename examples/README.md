@@ -19,6 +19,9 @@ Simply to run the following command to build node-red image
 To run the container image, use 
 
 ```
+KUBEFLOW_HOST=<your-kubeflow-instance-endpoint> \
+KUBEFLOW_USERNAME=<your-username-account> \
+KUBEFLOW_PASSWORD=<your-password> \
 ./run.sh <example-args>
 ```
 
@@ -27,7 +30,7 @@ which would mount the current folder (i.e. ./example) onto the containers. We to
 The example-args allows you to specify which example you want to run, for example
 
 ```
-./run 0.helloworld
+./run.sh 0.helloworld
 ```
 
 would run the `0.helloworld` example.

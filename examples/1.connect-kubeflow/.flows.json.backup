@@ -9,7 +9,7 @@
     {
         "id": "34d396e7c091c5fd",
         "type": "tab",
-        "label": "three-pipelines",
+        "label": "流程1",
         "disabled": false,
         "info": "",
         "env": []
@@ -163,43 +163,71 @@
         "wires": []
     },
     {
-        "id": "ba8b7060f34ca920",
-        "type": "decisionTree",
+        "id": "8dee94ea89d69868",
+        "type": "inject",
         "z": "34d396e7c091c5fd",
         "name": "",
-        "pyfile": "/data/1.connect-kubeflow/py/decisionTree.py",
-        "virtualenv": "",
-        "continuous": true,
-        "stdInData": "",
-        "python3": true,
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "3774dda722991262"
+            ]
+        ]
+    },
+    {
+        "id": "3774dda722991262",
+        "type": "function",
+        "z": "34d396e7c091c5fd",
+        "name": "",
+        "func": "// Create a Date object from the payload\nvar date = new Date(msg.payload);\n// Change the payload to be a formatted Date string\nmsg.payload = date.toString();\n// Return the message so it can be sent on\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 330,
-        "y": 200,
+        "y": 100,
         "wires": [
-            [
-                "4fe06d66df1b4abc"
-            ]
+            []
         ]
     },
     {
-        "id": "0d9bc06821e4baee",
-        "type": "randomForest",
+        "id": "3c4249285cbc688f",
+        "type": "pythonshell in",
         "z": "34d396e7c091c5fd",
-        "name": "",
-        "pyfile": "/data/1.connect-kubeflow/py/randomForest.py",
+        "name": "kfp python",
+        "pyfile": "/data/test/list_pipeline.py",
         "virtualenv": "",
         "continuous": true,
-        "stdInData": "",
+        "stdInData": false,
         "python3": true,
-        "x": 340,
-        "y": 320,
+        "x": 520,
+        "y": 100,
         "wires": [
             [
-                "f70f04576107ff77"
+                "34b5dbfbdecdea24"
             ]
         ]
     },
     {
-        "id": "4fe06d66df1b4abc",
+        "id": "34b5dbfbdecdea24",
         "type": "debug",
         "z": "34d396e7c091c5fd",
         "name": "",
@@ -207,61 +235,12 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 200,
+        "x": 720,
+        "y": 100,
         "wires": []
-    },
-    {
-        "id": "25502edaaffdbc08",
-        "type": "debug",
-        "z": "34d396e7c091c5fd",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 570,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "f70f04576107ff77",
-        "type": "debug",
-        "z": "34d396e7c091c5fd",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 570,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "7b45b43be009954d",
-        "type": "logisticRegression",
-        "z": "34d396e7c091c5fd",
-        "name": "",
-        "pyfile": "/data/1.connect-kubeflow/py/logisticRegression.py",
-        "virtualenv": "",
-        "continuous": true,
-        "stdInData": "",
-        "python3": true,
-        "x": 310,
-        "y": 260,
-        "wires": [
-            [
-                "25502edaaffdbc08"
-            ]
-        ]
     }
 ]
