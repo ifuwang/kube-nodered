@@ -16,18 +16,18 @@ https://github.com/kubeflow/pipelines/tree/1.8.21/backend/api/python_http_client
 
 
 # Usage instruction
-## Prerequsite
+## Prerequisite
 
 As this project focused on the node-red integration with Kubeflow, one running Kubeflow instance should be ready on a publicly available network.
-(If you need to provision your own Kubeflow instance, you could refer to our [mulitkf](https://github.com/footprintai/multikf) project to allocate one instance for developing.)
+(If you need to provision your Kubeflow instance, you could refer to our [mulitkf](https://github.com/footprintai/multikf) project to allocate one instance for developing.)
 
 ## Build Container Image
 
-You can proceed to [examples](./examples/README.md) folder and run the `./build.sh` to build the image locally or just run the `./run.sh` which would download the base image from our public repository.
+You can proceed to the [examples](./examples/README.md) folder and run the `./build.sh` to build the image locally or just run the `./run.sh` which would download the base image from our public repository.
 
 ## Running examples
 
-We organized some examples under [examples](./examples/README.md) folder, and make sensitive information pass via environment variables. Please refer the following example to launch an individual example:
+We organized some examples under [examples](./examples/README.md) folder, and make sensitive information pass via environment variables. Please refer to the following example to launch an individual example:
 ```
 # If you use Windows system, it is recommended to use WSL
 $ git clone https://github.com/NightLightTw/kubeflow-Node-RED.git
@@ -45,18 +45,18 @@ KUBEFLOW_PASSWORD=<your-password> \
         
 ## User interface
 
-1. then you can go to UI, check it out: http://127.0.0.1:1880/
+1. then you can go to UI, and check it out: http://127.0.0.1:1880/
 ![](https://hackmd.io/_uploads/HkoPcs4B3.png)
 
-2. press “install dependency”button to install dependency items such as specific python libraries and wait for its completion
+2. press the “install dependency” button to install dependency items such as specific Python libraries and wait for their completion
 ![](https://hackmd.io/_uploads/SymtCs4Sn.png)
 
 3. switch different pipelines and press the time stamp button to trigger the flow process
 ![](https://hackmd.io/_uploads/Byn7JnEBn.png)
-> **Info:** If the environment variable does not work, please fill in the account password directly in the python file
-## Only test python files to interact with kubeflow
+> **Info:** If the environment variable does not work, please fill in the account password directly in the Python file
+## Only test Python files to interact with kubeflow
 ```
-# Open another terminal and check docker status
+# Open another terminal and check the docker status
 docker ps
 #enter container
 docker exec -it <containerID> bash
@@ -76,23 +76,23 @@ You can directly override the login information of the specified file
 
 ex:![](https://hackmd.io/_uploads/ryx59rejBh.jpg)
 
-Change to your own login information
+Change your login information
 ```
 host = "https://example@test.com"
 username = "test01"
 password = "123456"
 ```
 
-# what to modify for your own custom nodes/pipeline
+# What to modify for your own custom nodes/pipeline
 ![implementation architecture](https://hackmd.io/_uploads/H1ZLgUsH2.png)
 
 ## Kubeflow part:
-### custom make pipeline’s yaml file
-Please refer to [Kubeflow implementation：add Random Forest algorithm](https://hackmd.io/@Nhi7So-lTz2m5R6pHyCLcA/Sk1eZFTbh)
+### Custom make pipeline’s yaml file
+Please refer to [Kubeflow implementation： add Random Forest algorithm](https://hackmd.io/@Nhi7So-lTz2m5R6pHyCLcA/Sk1eZFTbh)
 
 ### Take changing randomForest.py as an example
 
-Modify using your own yaml file path
+Modify using your yaml file path
 > **Info:** Line 66: uploadfile='pipelines/only_randomforest.yaml'
 
 > **Info:** Line 122~129 use json parser for filtering different outputs from get_run() 
@@ -123,7 +123,7 @@ auth_session = get_istio_auth_session(
     )
 
 # The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+# by the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
@@ -144,7 +144,7 @@ with kfp_server_api.ApiClient(configuration, cookie=auth_session["session_cookie
     # Create an instance of the  Experiment API class
     experiment_api_instance = kfp_server_api.ExperimentServiceApi(api_client)
     name="experiment-" + random_suffix()
-    description="This is a experiment for only_randomforest."
+    description="This is an experiment for only_randomforest."
     resource_reference_key_id = namespaces[0]
     resource_references=[kfp_server_api.models.ApiResourceReference(
         key=kfp_server_api.models.ApiResourceKey(
@@ -167,7 +167,7 @@ with kfp_server_api.ApiClient(configuration, cookie=auth_session["session_cookie
     name='pipeline-' + random_suffix()
     description="This is a only_randomForest pipline."
     try:
-        pipeline_api_response = api_instance.upload_pipeline(uploadfile, name=name, description=description)
+        pipeline_api_response = api_instance.upload_pipeline(upload file, name=name, description=description)
         pipeline_id = pipeline_api_response.id # str | The ID of the run to be retrieved.
     except ApiException as e:
         print("Exception when calling PipelineUploadServiceApi->upload_pipeline: %s\n" % e)
@@ -204,7 +204,7 @@ with kfp_server_api.ApiClient(configuration, cookie=auth_session["session_cookie
                 nodes = output['status']['nodes']
                 conditions = output['status']['conditions'] # Comfirm completion.
                 
-            except KeyError:
+            except for KeyError:
                 nodes = {}
                 conditions = []
 
@@ -231,7 +231,7 @@ with kfp_server_api.ApiClient(configuration, cookie=auth_session["session_cookie
         print("Parameter not found.")
         print(nodes)
 ```
-### Test python file
+### Test the Python file
 ```
 #ensure dependency items
 pip install kfp
@@ -299,7 +299,7 @@ function PythonshellInNode(config) {
     throw 'pyfile not present';
   }
   this.pythonExec = config.python3 ? "python3" : "python";
-  # Replace the path or change the following path to config.pyfile
+  # Replace the path or change the following path to config .pyfile
   this.pyfile = "/data/1.connect-kubeflow/py/decisionTree.py";
   this.virtualenv = config.virtualenv;
 ```
@@ -319,6 +319,3 @@ e.g. docker desktop
 ![](https://hackmd.io/_uploads/H1Hg7NJBn.png)
 e.g. wsl
 ![](https://hackmd.io/_uploads/rJwHQN1r2.png)
-
-
-
